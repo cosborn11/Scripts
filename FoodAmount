@@ -1,0 +1,48 @@
+cls
+# PowerShell Script for Emergency Food Supply Calculator
+# User Input
+$adults = Read-Host "Enter the number of adult family members (Ages 7+)"
+$children = Read-Host "Enter the number of younger family members (Ages 0-6)"
+$durationInput = Read-Host "Enter the food supply duration in months (0.5 for 2 weeks, 1, 2, 3, 6, or type '1 year' for 12 months)"
+
+# Convert "1 year" to 12 months
+if ($durationInput -eq "1 year") {
+    $durationInMonths = 12
+} else {
+    $durationInMonths = [double]$durationInput
+}
+
+# Constants based on guidelines (per person per month)
+$grainsLbs = 32.5
+$meatsLbs = 1.6
+$fatsAndOilsLbs = 2
+$beansLbs = 5.8
+$milkAndDairyLbs = 7.25
+$sugarsLbs = 5
+$cookingEssentialsLbs = 0.7
+$fruitsAndVeggiesLbs = 8 # Dried
+$fruitsAndVeggiesQts = 27 # Canned
+$waterGallons = 16
+
+# Calculations
+$totalGrains = ($grainsLbs * $durationInMonths) * ($adults + $children)
+$totalMeats = ($meatsLbs * $durationInMonths) * ($adults + $children)
+$totalFatsAndOils = ($fatsAndOilsLbs * $durationInMonths) * ($adults + $children)
+$totalBeans = ($beansLbs * $durationInMonths) * ($adults + $children)
+$totalMilkAndDairy = ($milkAndDairyLbs * $durationInMonths) * ($adults + $children)
+$totalSugars = ($sugarsLbs * $durationInMonths) * ($adults + $children)
+$totalCookingEssentials = ($cookingEssentialsLbs * $durationInMonths) * ($adults + $children)
+$totalFruitsAndVeggies = ($fruitsAndVeggiesLbs * $durationInMonths) * ($adults + $children) + ($fruitsAndVeggiesQts * $durationInMonths) * ($adults + $children)
+$totalWater = ($waterGallons * $durationInMonths) * ($adults + $children)
+
+# Output Results
+Write-Host "You will need approximately the following for a $durationInMonths month(s) supply:"
+Write-Host "Total Grains: $totalGrains lbs"
+Write-Host "Total Meats: $totalMeats lbs"
+Write-Host "Total Fats and Oils: $totalFatsAndOils lbs"
+Write-Host "Total Beans: $totalBeans lbs"
+Write-Host "Total Milk and Dairy: $totalMilkAndDairy lbs"
+Write-Host "Total Sugars: $totalSugars lbs"
+Write-Host "Total Cooking Essentials: $totalCookingEssentials lbs"
+Write-Host "Total Fruits and Vegetables (Dried and Canned): $totalFruitsAndVeggies lbs/qts"
+Write-Host "Total Water: $totalWater gallons"
